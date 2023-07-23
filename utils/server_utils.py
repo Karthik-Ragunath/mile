@@ -47,8 +47,12 @@ class CarlaServerManager():
     def start(self):
         kill_carla(self.port)
         for cfg in self.env_configs:
-            cmd = f'CUDA_VISIBLE_DEVICES={cfg["gpu"]} bash {self._carla_sh_str} ' \
-                f'-fps={CARLA_FPS} -quality-level=Epic -carla-rpc-port={cfg["port"]}'
+            start_port = int(cfg["port"])
+            end_port = start_port + 2
+            # cmd = f'CUDA_VISIBLE_DEVICES={cfg["gpu"]} bash {self._carla_sh_str} ' \
+            #     f'-fps={CARLA_FPS} -quality-level=Epic -carla-rpc-port={cfg["port"]}'
+            # cmd = f"""docker run --gpus {cfg["gpu"]} -d --rm -p {start_port}-{end_port}:{start_port}-{end_port}/tcp carla /bin/bash ./{self._carla_sh_str} -RenderOffScreen -vulkan -nosound -carla-rpc-port={cfg["port"]}"""
+            cmd = f"""docker run --gpus {cfg["gpu"]} -d --rm -p {start_port}-{end_port}:{start_port}-{end_port}/tcp carla /bin/bash ./{self._carla_sh_str} -RenderOffScreen -vulkan -nosound -carla-rpc-port={cfg["port"]}"""
             log.info(cmd)
             server_process = subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid)
         time.sleep(self._t_sleep)

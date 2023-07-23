@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Data-Collect",
+            "type": "python",
+            "request": "launch",
+            // python -u data_collect.py --config-name data_collect carla_sh_path=${CARLA_PATH} dataset_root=${DATASET_ROOT} port=${PORT} test_suites=${TEST_SUITE}
+            "program": "${workspaceFolder}/data_collect.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "justMyCode": true,
+            "args":[
+                "--config-name", "data_collect",
+                "carla_sh_path=CarlaUE4.sh",
+                "dataset_root=save_data/",
+                "port=2000",
+                "test_suites=lb_data.yaml"
+            ]
+        }
+    ]
+}

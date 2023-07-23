@@ -47,7 +47,7 @@ class ObsManager(ObsManagerBase):
         self._camera_transform = carla.Transform(location, rotation)
 
         self._sensor = None
-        self._queue_timeout = 10.0
+        self._queue_timeout = 6000.0
         self._image_queue = None
 
         super(ObsManager, self).__init__()

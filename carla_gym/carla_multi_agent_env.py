@@ -145,7 +145,7 @@ class CarlaMultiAgentEnv(gym.Env):
         while client is None:
             try:
                 client = carla.Client(host, port)
-                client.set_timeout(60.0)
+                client.set_timeout(150.0)
             except RuntimeError as re:
                 if "timeout" not in str(re) and "time-out" not in str(re):
                     print("Could not connect to Carla server because:", re)
